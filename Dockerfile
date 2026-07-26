@@ -1,32 +1,32 @@
-# Use an official Node.js image as the base (LTS version for stability)
-FROM node:18-alpine AS builder
+# Use an official Node.js image as the base (current LTS)
+FROM node:22-alpine AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json first (Leverage Docker cache)
+# Copy package.json and package-lock.json first (leverage Docker cache)
 COPY package*.json ./
 
-# Install dependencies in a clean environment
-RUN npm ci --only=production
+# Install ALL dependencies (build tooling like vite lives in devDependencies)
+RUN npm ci
 
 # Copy the rest of the application source code
 COPY . .
 
-# Build the React app
+# Build the app
 RUN npm run build
 
 # ---- Production Stage ----
-FROM node:18-alpine
+FROM node:22-alpine
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the built React app from the builder stage
-COPY --from=builder /app .
+# Only bring over what's needed to serve the built output
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/vite.config.js ./vite.config.js
 
-# Expose the port the app runs on
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "start"]
+CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
