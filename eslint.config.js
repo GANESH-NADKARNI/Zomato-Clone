@@ -39,4 +39,5 @@ export default [
       react: { version: "detect" },
     },
   },
-];
+]; 
+//eslint.config.js

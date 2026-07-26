@@ -30,3 +30,5 @@ COPY --from=builder /app/vite.config.js ./vite.config.js
 EXPOSE 3000
 
 CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
+
+## Dockerfile
