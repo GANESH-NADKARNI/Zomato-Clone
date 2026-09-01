@@ -39,7 +39,7 @@ pipeline {
         stage('quality gate') {
             steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Ssonarcube-token'
+                    waitForQualityGate abortPipeline: true, credentialsId: 'Ssonarcube-token'
                 }
             }
         }
@@ -49,28 +49,36 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
-        stage("Docker Build & Push"){
-            steps{
-                script{
-                   withDockerRegistry(credentialsId: 'docker-id'){   
-                       sh "docker build -t zomato ."
-                       sh "docker tag zomato divya009/zomato:latest "
-                       sh "docker push divya009/zomato:latest "
+
+        stage('Docker Build') {
+            steps {
+                sh "docker build -t zomato ."
+            }
+        }
+
+        stage('Trivy Scan') {
+            steps {
+                sh 'trivy image --exit-code 1 --severity HIGH,CRITICAL zomato'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-id') {
+                        sh "docker tag zomato divya009/zomato:latest"
+                        sh "docker push divya009/zomato:latest"
                     }
                 }
             }
         }
 
-        stage('TRIVY') {
-            steps {
-                sh 'trivy image divya009/zomato:latest > trivy.txt'
-            }
-        }
-
         stage('Deploy to container') {
             steps {
-                sh 'docker run -d --name zomato -p 3000:3000 divya009/zomato:latest'
+                sh '''
+                docker rm -f zomato || true
+                docker run -d --name zomato -p 3000:3000 divya009/zomato:latest
+                '''
             }
         }
     }

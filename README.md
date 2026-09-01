@@ -11,7 +11,7 @@ This **Zomato Clone: Secure Deployment with DevSecOps CI/CD** repository is a **
 ✅ **User-friendly UI** – Interactive menu, checkout, and order tracking.  
 ✅ **Secure DevOps Pipeline** – CI/CD automation with security checks.  
 ✅ **Optimized Deployment** – Uses containerization & cloud hosting.  
-✅ **React.js-Based Frontend** – Built with Create React App.  
+✅ **React.js-Based Frontend** – Built with Vite.  
 ✅ **Production-Ready** – Includes build optimizations & best practices.  
 
 > This repo is a great **learning project** for those interested in **DevSecOps, CI/CD, and secure web app deployment**. 🚀
@@ -28,7 +28,7 @@ This **Zomato Clone: Secure Deployment with DevSecOps CI/CD** repository is a **
 
 ## 🛠️ **Getting Started**  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+This project uses [Vite](https://vitejs.dev/) as its build tool.  
 
 ### 🔧 **Prerequisites**  
 
@@ -54,7 +54,7 @@ npm install
 Start the development server:  
 
 ```sh
-npm start  
+npm run dev  
 ```
 
 🔗 Open [http://localhost:3000](http://localhost:3000) in your browser.  
@@ -65,12 +65,13 @@ npm start
 
 | Command | Description |  
 |---------|------------|  
-| `npm start` | Runs the app in development mode |  
-| `npm test` | Launches the test runner |  
+| `npm run dev` | Runs the app in development mode |  
+| `npm test` | Launches the test runner (Vitest) |  
 | `npm run build` | Builds the app for production |  
-| `npm run eject` | Ejects the default configuration (irreversible) |  
+| `npm run preview` | Serves the production build locally |  
+| `npm run lint` | Lints the codebase |  
 
-For more details, check the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).  
+For more details, check the [Vite documentation](https://vitejs.dev/guide/).  
 
 ---
 
@@ -97,9 +98,9 @@ You can deploy this project on:
 ## 📚 Learn More  
 
 - 🏗️ [React Documentation](https://reactjs.org/)  
-- ⚡ [Code Splitting](https://facebook.github.io/create-react-app/docs/code-splitting)  
-- 🔍 [Analyzing Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)  
-- 📲 [Making a Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)  
+- ⚡ [Vite Documentation](https://vitejs.dev/)  
+- 🔍 [Building for Production](https://vitejs.dev/guide/build.html)  
+- 📦 [Vite Static Asset Handling](https://vitejs.dev/guide/assets.html)  
 
 ---
 
@@ -118,7 +119,7 @@ Contributions are welcome! If you'd like to improve this project, feel free to s
 ## 🛠️ **Author & Community**  
 
 This project is crafted by **[Harshhaa](https://github.com/NotHarshhaa)** 💡.  
-I’d love to hear your feedback! Feel free to share your thoughts.  
+I'd love to hear your feedback! Feel free to share your thoughts.  
 
 ---
 
@@ -134,5 +135,4 @@ I’d love to hear your feedback! Feel free to share your thoughts.
 
 ---
 
-### 🎉 **Happy Coding!** 🚀  
-........................................................................................
+### 🎉 **Happy Coding!** 🚀

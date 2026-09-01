@@ -29,6 +29,7 @@ COPY --from=builder /app/vite.config.js ./vite.config.js
 
 EXPOSE 3000
 
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
+# Run as the non-root 'node' user instead of root
+USER node
 
-## Dockerfile
+CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
